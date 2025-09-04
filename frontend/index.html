@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="upload-container">
+      <h2>Uploader un document</h2>
 
-<h1>Signer un document</h1>
+      <form id="upload-form">
+        <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg" />
 
-  <div class="pdf-preview">
-    
-    <iframe src="facture1.pdf" width="100%" height="400px"></iframe>
-  </div>
+        <div class="upload-buttons">
+          <button type="submit">Envoyer</button>
+        </div>
 
-  <div class="signature-section">
-    <h2>Votre signature</h2>
-    <canvas id="signature-canvas" width="500" height="200"></canvas>
-
-    <div class="buttons">
-      <button id="clear-btn">Effacer</button>
-      <button id="save-btn">Valider la signature</button>
+        <p id="upload-status" class="upload-status"></p>
+      </form>
     </div>
-  </div>
 
+    <h1>Signer un document</h1>
 
-    
-</body>
-<script src="script.js"></script>
+    <div class="pdf-preview">
+      <iframe
+        src="Les_fragments-1-1756978858825.pdf"
+        width="100%"
+        height="400px"
+      ></iframe>
+    </div>
+
+    <div class="signature-section">
+      <h2>Votre signature</h2>
+      <canvas id="signature-canvas" width="500" height="200"></canvas>
+
+      <div class="buttons">
+        <button id="clear-btn">Effacer</button>
+        <button id="save-btn">Valider la signature</button>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
 </html>

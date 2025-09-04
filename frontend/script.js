@@ -1,3 +1,73 @@
+const form = document.getElementById('upload-form');
+const fileInput = document.getElementById('file-input');
+const statusMsg = document.getElementById('upload-status');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const file = fileInput.files[0];
+
+
+  if (!file) {
+    return showStatus('Veuillez sélectionner un fichier.', 'error');
+  }
+
+  
+  if (file.size > 3 * 1024 * 1024) {
+    return showStatus('Le fichier ne doit pas dépasser 3 Mo.', 'error');
+  }
+
+  
+  const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+  if (!allowedTypes.includes(file.type)) {
+    return showStatus('Format de fichier non autorisé (PDF, PNG, JPG uniquement).', 'error');
+  }
+
+  
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const res = await fetch('http://localhost:3000/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) throw new Error('Erreur serveur');
+
+    showStatus('Fichier uploadé avec succès !', 'success');
+    form.reset();
+  } catch (err) {
+    console.error(err);
+    showStatus('Échec de l\'upload. Veuillez réessayer.', 'error');
+  }
+});
+
+function showStatus(message, type) {
+  statusMsg.textContent = message;
+  statusMsg.className = 'upload-status ' + type;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Section signature
 const canvas = document.getElementById("signature-canvas");
 const ctx = canvas.getContext("2d");
 let isDrawing = false;
@@ -71,4 +141,4 @@ document.getElementById("save-btn").addEventListener("click", () => {
     .catch(err => {
       console.error("Erreur envoi signature :", err);
     });
-});
+}); 
