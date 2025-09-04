@@ -51,5 +51,23 @@ export function deleteFile(req, res) {
       .json({ message: "Erreur lors de la suppression du fichier" });
   }
 }
+  
+export function getFiles(req, res) {
+  try {
+    const files = fs.readdirSync("uploads").map(file => {
+      const stats = fs.statSync(path.join("uploads", file));
+      return {
+        name: file,
+        size: stats.size,
+        type: path.extname(file),
+        url: `/uploads/${file}`,
+        uploadedAt: stats.birthtime
+      };
+    });
+    res.json(files);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur lecture fichiers" });
+  }
+};
 
 export default upload;
