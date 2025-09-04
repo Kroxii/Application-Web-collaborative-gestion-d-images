@@ -73,3 +73,6 @@ Le fichier image de la signature est stocké dans un dossier `/signatures` à la
 **Bonus :**
 - Bouton "effacer" pour réinitialiser le canvas avant validation.
 - Compression de l’image signature avant envoi pour réduire la taille.
+
+
+Repo créé par Ludo, Marie-Isabelle et Remi
