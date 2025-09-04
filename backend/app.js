@@ -18,6 +18,15 @@ app.use(
 app.use(express.json());
 app.use("/", router);
 
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({ message: err.message });
+  } else if (err) {
+    return res.status(400).json({ message: err.message });
+  }
+  next();
+});
+
 app.listen(PORT, (error) => {
   if (!error)
     console.log(
