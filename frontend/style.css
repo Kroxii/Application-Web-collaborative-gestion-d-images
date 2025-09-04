@@ -1,4 +1,71 @@
 
+.upload-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.upload-container h2 {
+  text-align: center;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+#file-input {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.upload-buttons {
+  text-align: center;
+}
+
+.upload-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-buttons button:hover {
+  background-color: #2563eb;
+}
+
+.upload-status {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.upload-status.success {
+  color: #10b981;
+}
+
+.upload-status.error {
+  color: #ef4444;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .signature-container {
   background-color: #ffffff;
   border-radius: 10px;

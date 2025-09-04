@@ -37,6 +37,49 @@ const upload = multer({
   },
 });
 
+export async function saveSignature(req, res) {
+  try {
+    const { filename, signature } = req.body;
+
+    if (!filename || !signature) {
+      return res.status(400).json({ message: "Fichier ou signature manquant." });
+    }
+
+    const base64Data = signature.replace(/^data:image\/png;base64,/, "");
+
+    
+    const signatureFilename = `${filename}-signature.png`;
+    const signatureDir = path.resolve("signatures");
+
+    
+    if (!fs.existsSync(signatureDir)) {
+      fs.mkdirSync(signatureDir, { recursive: true });
+    }
+
+   
+    const filePath = path.join(signatureDir, signatureFilename);
+
+    
+    fs.writeFileSync(filePath, base64Data, "base64");
+
+    res.status(200).json({ message: "Signature sauvegardée.", path: `/signatures/${signatureFilename}` });
+
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement de la signature :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 export function deleteFile(req, res) {
   try {
     const filepath = path.join("uploads", req.params.filename);

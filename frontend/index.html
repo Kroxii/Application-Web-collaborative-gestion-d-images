@@ -1,40 +1,47 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="upload-container">
-      <h2>Uploader un document</h2>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-      <form id="upload-form">
-        <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg" />
+<div class="upload-container">
+  <h2>Uploader un document</h2>
 
-        <div class="upload-buttons">
-          <button type="submit">Envoyer</button>
-        </div>
+  <form id="upload-form">
+    <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg" />
 
-        <p id="upload-status" class="upload-status"></p>
-      </form>
+    <div class="upload-buttons">
+      <button type="submit">Envoyer</button>
     </div>
 
-    <h1>Signer un document</h1>
+    <p id="upload-status" class="upload-status"></p>
+  </form>
+</div>
+
+
+
+ <h1>Signer un document</h1>
 
     <div id="files-list">
     </div>
 
-    <div class="signature-section">
-      <h2>Votre signature</h2>
-      <canvas id="signature-canvas" width="500" height="200"></canvas>
+  <div class="signature-section">
+    <h2>Votre signature</h2>
+    <canvas id="signature-canvas" width="500" height="200"></canvas>
 
-      <div class="buttons">
-        <button id="clear-btn">Effacer</button>
-        <button id="save-btn">Valider la signature</button>
-      </div>
+    <div class="buttons">
+      <button id="clear-btn">Effacer</button>
+      <button id="save-btn">Valider la signature</button>
     </div>
-  </body>
-  <script src="script.js"></script>
+  </div> 
+
+
+
+</body>
+<script src="script.js"></script>
 </html>
