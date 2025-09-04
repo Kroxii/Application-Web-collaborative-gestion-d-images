@@ -49,26 +49,9 @@ function showStatus(message, type) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Section signature
 const canvas = document.getElementById("signature-canvas");
+const iframe = getElementById("file-viewer");
 const ctx = canvas.getContext("2d");
 let isDrawing = false;
 
@@ -124,13 +107,22 @@ document.getElementById("save-btn").addEventListener("click", () => {
   const base64Signature = canvas.toDataURL("image/png");
 
   
+  
+  const src = iframe.getAttribute("src"); 
+
+  
+  if (!src) {
+    alert("Aucun fichier PDF affiché.");
+    return;
+  }
+
   fetch("http://localhost:3000/api/upload-signature", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      filename: "facture1.pdf", 
+      filename: src, 
       signature: base64Signature
     })
   })
@@ -141,4 +133,4 @@ document.getElementById("save-btn").addEventListener("click", () => {
     .catch(err => {
       console.error("Erreur envoi signature :", err);
     });
-}); 
+});
