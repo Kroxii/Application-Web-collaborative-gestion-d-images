@@ -8,11 +8,27 @@
 </head>
 <body>
 
-<h1>Signer un document</h1>
+<div class="upload-container">
+  <h2>Uploader un document</h2>
+
+  <form id="upload-form">
+    <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg" />
+    
+    <div class="upload-buttons">
+      <button type="submit">Envoyer</button>
+    </div>
+
+    <p id="upload-status" class="upload-status"></p>
+  </form>
+</div>
+
+
+
+ <h1>Signer un document</h1>
 
   <div class="pdf-preview">
     
-    <iframe src="facture1.pdf" width="100%" height="400px"></iframe>
+    <iframe src="Les_fragments-1-1756978858825.pdf" width="100%" height="400px"></iframe>
   </div>
 
   <div class="signature-section">
@@ -23,7 +39,7 @@
       <button id="clear-btn">Effacer</button>
       <button id="save-btn">Valider la signature</button>
     </div>
-  </div>
+  </div> 
 
 
     
