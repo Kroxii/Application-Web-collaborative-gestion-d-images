@@ -75,4 +75,4 @@ Le fichier image de la signature est stocké dans un dossier `/signatures` à la
 - Compression de l’image signature avant envoi pour réduire la taille.
 
 
-Repo créé par Ludo, Marie-Isabelle et Remi
+Repo créé par Ludo, Marie-Isabel et Remi
