@@ -67,7 +67,7 @@ function showStatus(message, type) {
 
 
 
-//Section signature feat
+//Section signature
 const canvas = document.getElementById("signature-canvas");
 const ctx = canvas.getContext("2d");
 let isDrawing = false;
