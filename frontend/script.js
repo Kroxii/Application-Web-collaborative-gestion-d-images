@@ -1,71 +1,79 @@
-const form = document.getElementById('upload-form');
-const fileInput = document.getElementById('file-input');
-const statusMsg = document.getElementById('upload-status');
+const form = document.getElementById("upload-form");
+const fileInput = document.getElementById("file-input");
+const statusMsg = document.getElementById("upload-status");
+const filesList = document.getElementById("files-list");
 
-form.addEventListener('submit', async (e) => {
+let focusedFilename = "";
+let focusedUrl = "";
+
+function handleClick(e, id) {
+  console.log("science");
+  focusedFilename = e.target[id].name;
+  focusedUrl = e.target[id].url;
+}
+
+async function refreshFilesList() {
+  const response = await fetch("http://localhost:3000/files", {
+    method: "GET",
+  });
+  const files = await response.json();
+  let i = 0;
+
+  files.forEach((f) => {
+    filesList.innerHTML += `<button id="${i}" class="file-button">name: ${f.name} size: ${f.size} bytes uploaded:${f.uploadedAt}</button>`;
+    document.getElementById(`${i}`).addEventListener("click", (e) => {
+      e.preventDefault();
+      handleClick(e, i);
+    });
+  });
+}
+
+refreshFilesList();
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const file = fileInput.files[0];
 
-
   if (!file) {
-    return showStatus('Veuillez sélectionner un fichier.', 'error');
+    return showStatus("Veuillez sélectionner un fichier.", "error");
   }
 
-  
   if (file.size > 3 * 1024 * 1024) {
-    return showStatus('Le fichier ne doit pas dépasser 3 Mo.', 'error');
+    return showStatus("Le fichier ne doit pas dépasser 3 Mo.", "error");
   }
 
-  
-  const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+  const allowedTypes = ["application/pdf", "image/png", "image/jpeg"];
   if (!allowedTypes.includes(file.type)) {
-    return showStatus('Format de fichier non autorisé (PDF, PNG, JPG uniquement).', 'error');
+    return showStatus(
+      "Format de fichier non autorisé (PDF, PNG, JPG uniquement).",
+      "error"
+    );
   }
 
-  
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
 
   try {
-    const res = await fetch('http://localhost:3000/upload', {
-      method: 'POST',
-      body: formData
+    const res = await fetch("http://localhost:3000/upload", {
+      method: "POST",
+      body: formData,
     });
 
-    if (!res.ok) throw new Error('Erreur serveur');
+    if (!res.ok) throw new Error("Erreur serveur");
 
-    showStatus('Fichier uploadé avec succès !', 'success');
+    showStatus("Fichier uploadé avec succès !", "success");
     form.reset();
+    refreshFilesList();
   } catch (err) {
     console.error(err);
-    showStatus('Échec de l\'upload. Veuillez réessayer.', 'error');
+    showStatus("Échec de l'upload. Veuillez réessayer.", "error");
   }
 });
 
 function showStatus(message, type) {
   statusMsg.textContent = message;
-  statusMsg.className = 'upload-status ' + type;
+  statusMsg.className = "upload-status " + type;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Section signature
 const canvas = document.getElementById("signature-canvas");
@@ -76,7 +84,6 @@ canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseup", endDraw);
 canvas.addEventListener("mouseout", endDraw);
-
 
 canvas.addEventListener("touchstart", startDrawTouch);
 canvas.addEventListener("touchmove", drawTouch);
@@ -121,24 +128,27 @@ document.getElementById("clear-btn").addEventListener("click", () => {
 });
 
 document.getElementById("save-btn").addEventListener("click", () => {
+  if (!focusedFilename || !focusedUrl)
+    return ;
+
   const base64Signature = canvas.toDataURL("image/png");
 
-  
   fetch("http://localhost:3000/api/upload-signature", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      filename: "facture1.pdf", 
-      signature: base64Signature
-    })
+      filename: focusedFilename,
+      url: focusedUrl,
+      signature: base64Signature,
+    }),
   })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       alert("Signature envoyée !");
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("Erreur envoi signature :", err);
     });
-}); 
+});
