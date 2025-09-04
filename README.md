@@ -1,6 +1,6 @@
 # Application-Web-collaborative-gestion-d-images
 
-# Application-Web-collaborative-gestion-d-images
+
 # Cahier des charges
 
 ## Objectif
