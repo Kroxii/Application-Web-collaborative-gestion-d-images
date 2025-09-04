@@ -1,0 +1,79 @@
+
+.signature-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.signature-container h1,
+.signature-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+
+.pdf-preview {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+
+.signature-section {
+  text-align: center;
+}
+
+
+#signature-canvas {
+  border: 2px solid #334155;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: crosshair;
+  width: 100%;
+  max-width: 500px;
+  height: 200px;
+  touch-action: none;
+  margin-bottom: 15px;
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+
+#clear-btn {
+  background-color: #ef4444; 
+  color: #fff;
+}
+
+#clear-btn:hover {
+  background-color: #dc2626;
+}
+
+
+#save-btn {
+  background-color: #10b981; 
+  color: #fff;
+}
+
+#save-btn:hover {
+  background-color: #059669;
+}
