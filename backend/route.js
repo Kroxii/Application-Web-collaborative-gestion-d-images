@@ -15,6 +15,22 @@ router.post("/upload", upload.single("file"), (req, res) => {
   });
 });
 
+router.get("/download/:filename", (req, res) => {
+  const filePath = path.join("uploads", req.params.filename);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ message: "Fichier introuvable" });
+  }
+
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="${req.params.filename}"`
+  );
+  res.setHeader("Content-Type", "application/octet-stream");
+
+  res.sendFile(filePath, { root: "." });
+});
+
 router.delete("/delete/:filename", deleteFile);
 router.get("/files", getFiles);
 router.post("signature", saveSignature)

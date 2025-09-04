@@ -1,6 +1,7 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { fileTypeFromFile } from "file-type";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -70,15 +71,21 @@ export async function saveSignature(req, res) {
   }
 }
 
+const fileFilter = async (req, file, cb) => {
+  const allowedExt = ["png", "jpg", "jpeg", "pdf", "txt"];
+  const ext = path.extname(file.originalname).slice(1).toLowerCase();
 
+  if (!allowedExt.includes(ext)) {
+    return cb(new Error("Extension non autorisée."), false);
+  }
 
+  const type = await fileTypeFromFile(file.path);
+  if (type && !allowedExt.includes(type.ext)) {
+    return cb(new Error("Le fichier ne correspond pas à son extension."), false);
+  }
 
-
-
-
-
-
-
+  cb(null, true);
+};
 
 export function deleteFile(req, res) {
   try {
